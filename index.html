@@ -9,6 +9,13 @@
       padding: 0;
     }
 
+    .banner {
+      background-color: lightgray;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
     .chart-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -17,8 +24,8 @@
 
     .chart-container {
       position: relative;
-      width: 100%;
-      height: 400px; /* Adjust the height as needed */
+      width: calc(50% - 20px);
+      height: 400px;
     }
 
     .chart {
@@ -58,6 +65,8 @@
   </style>
 </head>
 <body>
+  <div class="banner">Charts Example</div>
+
   <div class="chart-grid">
     <div class="chart-container">
       <div class="chart-title">Chart 1</div>
@@ -103,14 +112,13 @@
     ];
 
     // Chart dimensions
-    const width = document.documentElement.clientWidth * 0.75;
     const height = 400;
 
     // Create the SVG container
     const svg = d3
       .select("#chart4")
       .append("svg")
-      .attr("width", width)
+      .attr("width", "100%")
       .attr("height", height);
 
     // Stack the data
@@ -121,7 +129,7 @@
     const xScale = d3
       .scaleBand()
       .domain(data.map((d) => d.month))
-      .range([0, width])
+      .range([0, svg.attr("width")])
       .paddingInner(0.1);
 
     const yScale = d3
