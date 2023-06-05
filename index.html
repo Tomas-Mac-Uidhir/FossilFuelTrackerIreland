@@ -31,7 +31,7 @@
 
     .chart {
       width: 100%;
-      height: 100%;
+      height: calc(100% - 30px);
     }
 
     .chart-title {
@@ -136,13 +136,14 @@
     ];
 
     // Chart dimensions
+    const width = Math.min(600, window.innerWidth - 40);
     const height = 400;
 
     // Create the SVG container
     const svg = d3
       .select("#chart4")
       .append("svg")
-      .attr("width", "100%")
+      .attr("width", width)
       .attr("height", height);
 
     // Stack the data
@@ -153,7 +154,7 @@
     const xScale = d3
       .scaleBand()
       .domain(data.map((d) => d.month))
-      .range([0, svg.attr("width")])
+      .range([0, width])
       .paddingInner(0.1);
 
     const yScale = d3
