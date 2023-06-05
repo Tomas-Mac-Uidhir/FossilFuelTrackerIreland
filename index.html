@@ -87,7 +87,7 @@
       <div class="chart-title">Chart 4 (Stacked Area Chart)</div>
       <div class="chart" id="chart4"></div>
       <div class="chart-text-container">
-        <div class="chart-text">cumulative emissions 1990 - 2030</div>
+        <div class="chart-text">Text below Chart 4</div>
       </div>
     </div>
   </div>
@@ -103,8 +103,8 @@
     ];
 
     // Chart dimensions
-    const width = 400;
-    const height = 300;
+    const width = document.documentElement.clientWidth * 0.75;
+    const height = 400;
 
     // Create the SVG container
     const svg = d3
