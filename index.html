@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <title>Charts Example</title>
   <style>
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
     .chart-container {
       width: 400px;
       height: 300px;
-      margin-bottom: 20px;
       padding: 10px;
     }
 
@@ -37,24 +42,26 @@
   </style>
 </head>
 <body>
-  <div class="chart-container">
-    <div class="chart-title">Chart 1</div>
-    <div class="chart-text">Text below Chart 1</div>
-  </div>
+  <div class="chart-grid">
+    <div class="chart-container">
+      <div class="chart-title">Chart 1</div>
+      <div class="chart-text">Text below Chart 1</div>
+    </div>
 
-  <div class="chart-container">
-    <div class="chart-title">Chart 2</div>
-    <div class="chart-text">Text below Chart 2</div>
-  </div>
+    <div class="chart-container">
+      <div class="chart-title">Chart 2</div>
+      <div class="chart-text">Text below Chart 2</div>
+    </div>
 
-  <div class="chart-container">
-    <div class="chart-title">Chart 3</div>
-    <div class="chart-text">Text below Chart 3</div>
-  </div>
+    <div class="chart-container">
+      <div class="chart-title">Chart 3</div>
+      <div class="chart-text">Text below Chart 3</div>
+    </div>
 
-  <div class="chart-container">
-    <div class="chart-title">Chart 4</div>
-    <div class="chart-text">Text below Chart 4</div>
+    <div class="chart-container">
+      <div class="chart-title">Chart 4</div>
+      <div class="chart-text">Text below Chart 4</div>
+    </div>
   </div>
 </body>
 </html>
