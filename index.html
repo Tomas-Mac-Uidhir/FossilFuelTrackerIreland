@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Charts Example</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -86,12 +87,71 @@
     </div>
 
     <div class="chart-container">
-      <div class="chart-title">Chart 4</div>
+      <div class="chart-title">Chart 4 (Stacked Area Chart)</div>
       <div class="chart" id="chart4"></div>
       <div class="chart-text-container">
         <div class="chart-text">Text below Chart 4</div>
       </div>
     </div>
   </div>
+
+  <script>
+    // Stacked Area Chart Data
+    const data = [
+      { month: "Jan", apples: 10, oranges: 5, bananas: 15 },
+      { month: "Feb", apples: 15, oranges: 10, bananas: 12 },
+      { month: "Mar", apples: 20, oranges: 12, bananas: 8 },
+      { month: "Apr", apples: 18, oranges: 15, bananas: 10 },
+      { month: "May", apples: 12, oranges: 8, bananas: 16 },
+    ];
+
+    // Chart dimensions
+    const width = document.documentElement.clientWidth * 0.75; // 75% of screen width
+    const height = document.documentElement.clientHeight * 0.75; // 75% of screen height
+
+    // Create the SVG container
+    const svg = d3
+      .select("#chart4")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    // Stack the data
+    const stack = d3.stack().keys(["apples", "oranges", "bananas"]);
+    const stackedData = stack(data);
+
+    // Define the scales
+    const xScale = d3
+      .scaleBand()
+      .domain(data.map((d) => d.month))
+      .range([0, width])
+      .paddingInner(0.1);
+
+    const yScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(stackedData, (d) => d3.max(d, (d) => d[1]))])
+      .range([height, 0]);
+
+    // Define the area generator
+    const area = d3
+      .area()
+      .x((d) => xScale(d.data.month) + xScale.bandwidth() / 2)
+      .y0((d) => yScale(d[0]))
+      .y1((d) => yScale(d[1]))
+      .curve(d3.curveMonotoneX);
+
+    // Draw the stacked areas
+    svg
+      .selectAll("path")
+      .data(stackedData)
+      .enter()
+      .append("path")
+      .attr("d", area)
+      .attr("fill", (d) => {
+        if (d.key === "apples") return "#ffcc00";
+        if (d.key === "oranges") return "#00ccff";
+        if (d.key === "bananas") return "#ff66cc";
+      });
+  </script>
 </body>
 </html>
